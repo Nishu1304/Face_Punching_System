@@ -12,7 +12,7 @@ app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 
 # SQLAlchemy Database Configuration
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:password@localhost/attendance'  # Update this line
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:password@localhost/attendance'  
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
@@ -26,7 +26,7 @@ class Attendance(db.Model):
     date = db.Column(db.Date, nullable=False)
     check_in = db.Column(db.Time)
     check_out = db.Column(db.Time)
-    score = db.Column(db.Boolean, default=False)  # True for checked in, False for checked out
+    score = db.Column(db.Boolean, default=False)  
 
 
 # Define the Entries model
@@ -74,7 +74,7 @@ def load_embedding_models():
 # Function to extract face embeddings from an image
 def get_face_embeddings(image):
     boxes, _ = mtcnn.detect(image)
-    print("Detected boxes:", boxes)  # Debugging line to check if faces are detected
+    print("Detected boxes:", boxes) 
     embeddings = []
 
     if boxes is not None:
@@ -86,9 +86,9 @@ def get_face_embeddings(image):
             with torch.no_grad():
                 embedding = inception_model(face_tensor)
             embeddings.append(embedding.cpu().numpy().flatten())
-            print("Generated embedding:", embedding)  # Debugging line to check embeddings
+            print("Generated embedding:", embedding)  
 
-    print("Total embeddings generated:", len(embeddings))  # Check the number of embeddings
+    print("Total embeddings generated:", len(embeddings)) 
     return np.array(embeddings)
 
 
@@ -178,7 +178,7 @@ def capture():
 
         if face_embeddings.size > 0:
             cluster_label = kmeans_model.predict(face_embeddings)[0]  # Get single cluster label
-            print("Predicted cluster:", cluster_label)  # Debugging line to check cluster prediction
+            print("Predicted cluster:", cluster_label)  
             record_attendance(cluster_label)
             flash(
                 f'Image captured and attendance recorded for employee ID {cluster_mapping.get(cluster_label, "Unknown")}.')  # Updated message
@@ -191,12 +191,12 @@ def capture():
 
 
 if __name__ == '__main__':
-    kmeans_model = load_kmeans_model()  # Load the KMeans model once when the app starts
-    load_embedding_models()  # Load the MTCNN and InceptionResnetV1 models once when the app starts
+    kmeans_model = load_kmeans_model()  
+    load_embedding_models()  
 
     # Create database tables within the application context
     with app.app_context():
-        db.create_all()  # Creates tables if not already present
+        db.create_all()  
 
     app.run(debug=True)
 
