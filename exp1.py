@@ -3,13 +3,13 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# Database connection details
+
 username = 'root'
 password = 'password'
 host = 'localhost'
 database = 'attendance'
 
-# Create database engine
+
 engine = create_engine(f'mysql+pymysql://{username}:{password}@{host}/{database}')
 
 # Fetch attendance data with a join to get employee names
@@ -33,7 +33,7 @@ plt.title('Average Hours Worked per Employee')
 plt.xlabel('Employee Name')
 plt.ylabel('Average Hours Worked')
 plt.xticks(rotation=45)
-plt.tight_layout()  # Adjust layout for better fit
+plt.tight_layout() 
 plt.show()
 
 # Plot late arrivals
@@ -47,9 +47,8 @@ plt.xticks(rotation=45)
 plt.tight_layout()  # Adjust layout for better fit
 plt.show()
 
-# Calculate overtime hours
-# Assuming overtime is defined as any hours worked beyond 8 hours in a day
-df['overtime_hours'] = df['hours_worked'].apply(lambda x: x - 8 if x > 8 else 0)
+
+df['overtime_hours'] = df['hours_worked'].apply(lambda x: x - 8 if x > 8 else 0) # 8 hours is adequete time
 
 # Plot total overtime hours per employee
 overtime_summary = df.groupby('name')['overtime_hours'].sum().reset_index()
@@ -59,6 +58,6 @@ plt.title('Total Overtime Hours per Employee')
 plt.xlabel('Employee Name')
 plt.ylabel('Total Overtime Hours')
 plt.xticks(rotation=45)
-plt.tight_layout()  # Adjust layout for better fit
+plt.tight_layout()  
 plt.show()
 
