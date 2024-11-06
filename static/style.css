@@ -1,0 +1,41 @@
+body {
+    background-color: #e0f7e9;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+h2 {
+    color: #0a7300;
+}
+
+img {
+    width: 400px;
+    height: auto;
+    border: 5px solid #0a7300;
+    border-radius: 10px;
+}
+
+button {
+    background-color: #0a7300;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #066600;
+}
+
+.flash-message {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    color: #0a7300;
+}
+
+
